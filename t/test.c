@@ -270,7 +270,8 @@ test_add_remove_add(void)
    struct tokenset *p = tokenset_new();
    int         id1, id2, id3, id4;
 
-   _printf_test_name("test_add_remove_add", "tokenset_add, tokenset_remove, tokenset_id, tokenset_exists");
+   _printf_test_name("test_add_remove_add",
+                     "tokenset_add, tokenset_remove, tokenset_id, tokenset_exists");
 
    id1 = tokenset_add(p, "jim");
    id2 = tokenset_add(p, "james");
