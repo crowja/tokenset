@@ -51,7 +51,8 @@ test_constr(void)
 
    z = tokenset_new();
    ASSERT("Constructor test", z);
-   tokenset_free(z);
+   tokenset_free(&z);
+   ASSERT_EQUALS(NULL, z);
 }
 
 
@@ -108,7 +109,8 @@ test_stress_1(void)
    ASSERT_EQUALS(count1, count3);
    ASSERT_EQUALS(0, tokenset_count(p));
 
-   tokenset_free(p);
+   tokenset_free(&p);
+   ASSERT_EQUALS(NULL, p);
 }
 
 static void
@@ -159,7 +161,8 @@ test_stress_2(void)
    ASSERT_EQUALS(count2, count3);
    ASSERT_EQUALS(0, tokenset_count(p));
 
-   tokenset_free(p);
+   tokenset_free(&p);
+   ASSERT_EQUALS(NULL, p);
 }
 
 
@@ -192,7 +195,8 @@ test_stress_3(void)
    ASSERT_STRING_EQUALS("johnny_3", tokenset_get_by_id(p, 30));
    ASSERT_STRING_EQUALS("bob_9", tokenset_get_by_id(p, 73));
 
-   tokenset_free(p);
+   tokenset_free(&p);
+   ASSERT_EQUALS(NULL, p);
 }
 
 
@@ -216,7 +220,8 @@ test_add(void)
    ASSERT_EQUALS(1, tokenset_exists(p, "robert"));
    ASSERT_EQUALS(0, tokenset_exists(p, "reginald"));
 
-   tokenset_free(p);
+   tokenset_free(&p);
+   ASSERT_EQUALS(NULL, p);
 }
 
 
@@ -241,7 +246,8 @@ test_remove_1(void)
    ASSERT_EQUALS(0, tokenset_exists(p, "robert"));
    ASSERT_EQUALS(0, tokenset_exists(p, "reginald"));
 
-   tokenset_free(p);
+   tokenset_free(&p);
+   ASSERT_EQUALS(NULL, p);
 }
 
 
@@ -260,7 +266,8 @@ test_remove_2(void)
    ASSERT_EQUALS(0, tokenset_exists(p, "robert"));
    ASSERT_EQUALS(0, tokenset_exists(p, "reginald"));
 
-   tokenset_free(p);
+   tokenset_free(&p);
+   ASSERT_EQUALS(NULL, p);
 }
 
 
@@ -291,7 +298,8 @@ test_add_remove_add(void)
 
    ASSERT_EQUALS(0, tokenset_exists(p, "james"));
 
-   tokenset_free(p);
+   tokenset_free(&p);
+   ASSERT_EQUALS(NULL, p);
 }
 
 
@@ -367,7 +375,8 @@ test_get(void)
 #if 0
 #endif
 
-   tokenset_free(p);
+   tokenset_free(&p);
+   ASSERT_EQUALS(NULL, p);
 }
 
 static void
@@ -381,10 +390,12 @@ test_reset(void)
 
    ASSERT_EQUALS(tokenset_count(z), 0);
 
-   tokenset_free(z);
+   tokenset_free(&z);
+   ASSERT_EQUALS(NULL, z);
 }
 
-/* 11 yy */
+#if 0
+/* 12 yy */
 static void
 test_stub(void)
 {
@@ -394,14 +405,15 @@ test_stub(void)
 
    ASSERT("Constructor test", z);
 
-   tokenset_free(z);
+   tokenset_free(&z);
+   ASSERT_EQUALS(NULL, p);
 }
+#endif
 
 int
 main(void)
 {
    printf("%s\n", tokenset_version());
-   test_stub();                                  /* to quiet compiler warnings */
    RUN(test_constr);
    RUN(test_stress_1);
    RUN(test_stress_2);
