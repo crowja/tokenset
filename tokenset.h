@@ -1,7 +1,7 @@
 /**
  *  @file tokenset.h
  *  @version 1.2.2-dev0
- *  @date Wed Dec  4 12:55:59 CST 2019
+ *  @date Tue Dec 10 12:49:29 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -38,7 +38,7 @@ struct tokenset *tokenset_new(void);
  *  @param[in] p Pointer to a tokenset object
  */
 
-void        tokenset_free(struct tokenset *p);
+void        tokenset_free(struct tokenset **pp);
 
 /**
  *  @brief Adds a string to the tokenset.

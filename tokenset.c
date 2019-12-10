@@ -1,7 +1,7 @@
 /**
  *  @file tokenset.c
  *  @version 1.2.2-dev0
- *  @date Wed Dec  4 12:55:59 CST 2019
+ *  @date Tue Dec 10 12:49:29 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief Simple class for mapping tokens to integers and retrieving tokens.
  *  @details Map strings, i.e., tokens, to consecutive integers using
@@ -43,8 +43,6 @@ _text_sort(struct _token *a, struct _token *b)
    return strcmp(a->text, b->text);
 }
 
-/*** tokenset_new() ***/
-
 struct tokenset *
 tokenset_new(void)
 {
@@ -60,39 +58,33 @@ tokenset_new(void)
    return tp;
 }
 
-/*** tokenset_free() ***/
-
 void
-tokenset_free(struct tokenset *p)
+tokenset_free(struct tokenset **pp)
 {
    struct _token *s;
    struct _token *t;
 
-   if (_IS_NULL(p))
+   if (_IS_NULL(*pp))
       return;
 
-   t = p->tokens;
+   t = (*pp)->tokens;
 
    while (t != NULL) {
       s = t;
       t = s->hh.next;
       _FREE(s->text);
-      HASH_DEL(p->tokens, s);
+      HASH_DEL((*pp)->tokens, s);
       _FREE(s);
    }
 
-   _FREE(p);
+   _FREE(*pp);
 }
-
-/*** tokenset_version() ***/
 
 const char *
 tokenset_version(void)
 {
    return version;
 }
-
-/*** tokenset_add() ***/
 
 int
 tokenset_add(struct tokenset *p, char *n)
@@ -121,15 +113,11 @@ tokenset_add(struct tokenset *p, char *n)
    return s->id;
 }
 
-/*** tokenset_count() ***/
-
 int
 tokenset_count(struct tokenset *p)
 {
    return HASH_COUNT(p->tokens);
 }
-
-/*** tokenset_exists() ***/
 
 int
 tokenset_exists(struct tokenset *p, char *n)
@@ -140,8 +128,6 @@ tokenset_exists(struct tokenset *p, char *n)
 
    return _IS_NULL(s) ? 0 : 1;
 }
-
-/*** tokenset_get() ***/
 
 char      **
 tokenset_get(struct tokenset *p)
@@ -163,8 +149,6 @@ tokenset_get(struct tokenset *p)
    return list;
 }
 
-/*** tokenset_get_by_id() ***/
-
 const char *
 tokenset_get_by_id(struct tokenset *p, unsigned id)
 {
@@ -184,8 +168,6 @@ tokenset_get_by_id(struct tokenset *p, unsigned id)
    return NULL;
 }
 
-/*** tokenset_id() ***/
-
 int
 tokenset_id(struct tokenset *p, char *n)
 {
@@ -199,8 +181,6 @@ tokenset_id(struct tokenset *p, char *n)
    return _IS_NULL(s) ? 0 : 1;
 #endif
 }
-
-/*** tokenset_remove() ***/
 
 void
 tokenset_remove(struct tokenset *p, char *n)
@@ -218,8 +198,6 @@ tokenset_remove(struct tokenset *p, char *n)
    _FREE(s);
 }
 
-/*** tokenset_reset() ***/
-
 void
 tokenset_reset(struct tokenset *p)
 {
@@ -236,8 +214,6 @@ tokenset_reset(struct tokenset *p)
 
    p->size = 0;
 }
-
-/*** tokenset_sort() ***/
 
 void
 tokenset_sort(struct tokenset *p)
