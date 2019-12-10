@@ -1,6 +1,6 @@
 /**
  *  @file tokenset.h
- *  @version 1.2.2-dev0
+ *  @version 1.3.0-dev0
  *  @date Tue Dec 10 12:49:29 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME

@@ -1,6 +1,6 @@
 /**
  *  @file tokenset.c
- *  @version 1.2.2-dev0
+ *  @version 1.3.0-dev0
  *  @date Tue Dec 10 12:49:29 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief Simple class for mapping tokens to integers and retrieving tokens.
@@ -24,7 +24,7 @@
 #endif
 #define _FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
 
-static const char version[] = "1.2.2-dev0";
+static const char version[] = "1.3.0-dev0";
 
 struct _token {
    char       *text;
