@@ -78,6 +78,7 @@ tokenset_free(struct tokenset **pp)
    }
 
    _FREE(*pp);
+   *pp = NULL;
 }
 
 const char *
