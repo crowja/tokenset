@@ -24,8 +24,6 @@
 #endif
 #define _FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
 
-static const char version[] = "1.3.0-dev0";
-
 struct _token {
    char       *text;
    unsigned    id;
@@ -84,7 +82,7 @@ tokenset_free(struct tokenset **pp)
 const char *
 tokenset_version(void)
 {
-   return version;
+   return "1.3.0-dev0";
 }
 
 int
