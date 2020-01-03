@@ -2,7 +2,8 @@
  *  @file tokenset.c
  *  @version 1.3.0-dev0
  *  @date Tue Dec 10 12:49:29 CST 2019
- *  @copyright %COPYRIGHT%
+ *  @copyright 2020 John A. Crow <crowja@gmail.com>
+ *  @license Unlicense <http://unlicense.org/>
  *  @brief Simple class for mapping tokens to integers and retrieving tokens.
  *  @details Map strings, i.e., tokens, to consecutive integers using
  *  tokenset_add(). Retrieve these tokens integer using tokenset_get_by_id().
