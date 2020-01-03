@@ -1,6 +1,6 @@
 /**
  *  @file tokenset.c
- *  @version 1.3.0-dev0
+ *  @version 1.4.0-dev0
  *  @date Tue Dec 10 12:49:29 CST 2019
  *  @copyright 2020 John A. Crow <crowja@gmail.com>
  *  @license Unlicense <http://unlicense.org/>
@@ -83,7 +83,7 @@ tokenset_free(struct tokenset **pp)
 const char *
 tokenset_version(void)
 {
-   return "1.3.0-dev0";
+   return "1.4.0-dev0";
 }
 
 int
