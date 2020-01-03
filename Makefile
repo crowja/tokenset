@@ -58,8 +58,8 @@ indent: stamp
 	done
 
 stamp:
-	@bash stamper.bash tokenset.c
-	@bash stamper.bash tokenset.h
+	@stamper.bash tokenset.c
+	@stamper.bash tokenset.h
 
 clean:
 	@/bin/rm -f *.o *~ *.BAK *.bak core.*
