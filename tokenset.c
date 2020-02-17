@@ -1,8 +1,8 @@
 /**
  *  @file tokenset.c
  *  @version 1.4.0-dev0
- *  @date Tue Dec 10 12:49:29 CST 2019
- *  @copyright 2020 John A. Crow <crowja@gmail.com>
+ *  @date Sun Feb 16, 2020 07:19:21 PM CST
+ *  @copyright 2018-2020 John A. Crow <crowja@gmail.com>
  *  @license Unlicense <http://unlicense.org/>
  *  @brief Simple class for mapping tokens to integers and retrieving tokens.
  *  @details Map strings, i.e., tokens, to consecutive integers using
@@ -15,15 +15,15 @@
 #include "uthash.h"
 #include "tokenset.h"
 
-#ifdef  _IS_NULL
-#undef  _IS_NULL
+#ifdef  IS_NULL
+#undef  IS_NULL
 #endif
-#define _IS_NULL(p)   ((NULL == (p)) ? (1) : (0))
+#define IS_NULL(p)   ((NULL == (p)) ? (1) : (0))
 
-#ifdef  _FREE
-#undef  _FREE
+#ifdef  FREE
+#undef  FREE
 #endif
-#define _FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
+#define FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
 
 struct _token {
    char       *text;
@@ -48,7 +48,7 @@ tokenset_new(void)
    struct tokenset *tp;
 
    tp = (struct tokenset *) malloc(sizeof(struct tokenset));
-   if (_IS_NULL(tp))
+   if (IS_NULL(tp))
       return NULL;
 
    tp->size = 0;
@@ -63,20 +63,20 @@ tokenset_free(struct tokenset **pp)
    struct _token *s;
    struct _token *t;
 
-   if (_IS_NULL(*pp))
+   if (IS_NULL(*pp))
       return;
 
    t = (*pp)->tokens;
 
-   while (t != NULL) {
+   while (!IS_NULL(t)) {
       s = t;
       t = s->hh.next;
-      _FREE(s->text);
+      FREE(s->text);
       HASH_DEL((*pp)->tokens, s);
-      _FREE(s);
+      FREE(s);
    }
 
-   _FREE(*pp);
+   FREE(*pp);
    *pp = NULL;
 }
 
@@ -93,7 +93,7 @@ tokenset_add(struct tokenset *p, char *n)
 
    HASH_FIND_STR(p->tokens, n, s);
 
-   if (!_IS_NULL(s))
+   if (!IS_NULL(s))
       return s->id;
 
    s = (struct _token *) malloc(sizeof(struct _token));
@@ -126,7 +126,7 @@ tokenset_exists(struct tokenset *p, char *n)
 
    HASH_FIND_STR(p->tokens, n, s);
 
-   return _IS_NULL(s) ? 0 : 1;
+   return IS_NULL(s) ? 0 : 1;
 }
 
 char      **
@@ -156,7 +156,7 @@ tokenset_get_by_id(struct tokenset *p, unsigned id)
    struct _token *s;
    struct _token *t = p->tokens;
 
-   while (t != NULL) {
+   while (!IS_NULL(t)) {
 
       s = t;
       t = s->hh.next;
@@ -175,10 +175,10 @@ tokenset_id(struct tokenset *p, char *n)
 
    HASH_FIND_STR(p->tokens, n, s);
 
-   return _IS_NULL(s) ? -1 : (int) s->id;
+   return IS_NULL(s) ? -1 : (int) s->id;
 
 #if 0
-   return _IS_NULL(s) ? 0 : 1;
+   return IS_NULL(s) ? 0 : 1;
 #endif
 }
 
@@ -189,13 +189,13 @@ tokenset_remove(struct tokenset *p, char *n)
 
    HASH_FIND_STR(p->tokens, n, s);
 
-   if (_IS_NULL(s))
+   if (IS_NULL(s))
       return;
 
-   _FREE(s->text);
+   FREE(s->text);
    HASH_DEL(p->tokens, s);
 
-   _FREE(s);
+   FREE(s);
 }
 
 void
@@ -204,12 +204,12 @@ tokenset_reset(struct tokenset *p)
    struct _token *s;
    struct _token *t = p->tokens;
 
-   while (t != NULL) {
+   while (!IS_NULL(t)) {
       s = t;
       t = s->hh.next;
-      _FREE(s->text);
+      FREE(s->text);
       HASH_DEL(p->tokens, s);
-      _FREE(s);
+      FREE(s);
    }
 
    p->size = 0;
@@ -221,5 +221,5 @@ tokenset_sort(struct tokenset *p)
    HASH_SORT(p->tokens, _text_sort);
 }
 
-#undef  _IS_NULL
-#undef  _FREE
+#undef  IS_NULL
+#undef  FREE

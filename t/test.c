@@ -4,36 +4,36 @@
 #include "tokenset.h"
 #include "t/tinytest.h"
 
-#ifdef  _COLOR_CODE
-#undef  _COLOR_CODE
+#ifdef  COLOR_CODE
+#undef  COLOR_CODE
 #endif
-#define _COLOR_CODE       0x1B
+#define COLOR_CODE       0x1B
 
-#ifdef  _COLOR_RED
-#undef  _COLOR_RED
+#ifdef  COLOR_RED
+#undef  COLOR_RED
 #endif
-#define _COLOR_RED        "[1;31m"
+#define COLOR_RED        "[1;31m"
 
-#ifdef  _COLOR_GREEN
-#undef  _COLOR_GREEN
+#ifdef  COLOR_GREEN
+#undef  COLOR_GREEN
 #endif
-#define _COLOR_GREEN      "[1;32m"
+#define COLOR_GREEN      "[1;32m"
 
-#ifdef  _COLOR_YELLOW
-#undef  _COLOR_YELLOW
+#ifdef  COLOR_YELLOW
+#undef  COLOR_YELLOW
 #endif
-#define _COLOR_YELLOW     "[1;33m"
+#define COLOR_YELLOW     "[1;33m"
 
-#ifdef  _COLOR_RESET
-#undef  _COLOR_RESET
+#ifdef  COLOR_RESET
+#undef  COLOR_RESET
 #endif
-#define _COLOR_RESET      "[0m"
+#define COLOR_RESET      "[0m"
 
 
 static void
-_printf_test_name(char *name, char *info)
+printf_test_name(char *name, char *info)
 {
-   printf("%c%s%s%c%s", _COLOR_CODE, _COLOR_YELLOW, name, _COLOR_CODE, _COLOR_RESET);
+   printf("%c%s%s%c%s", COLOR_CODE, COLOR_YELLOW, name, COLOR_CODE, COLOR_RESET);
 
    if (NULL != info)
       printf(" [%s]\n", info);
@@ -47,7 +47,7 @@ test_constr(void)
 {
    struct tokenset *z;
 
-   _printf_test_name("test_constr", NULL);
+   printf_test_name("test_constr", NULL);
 
    z = tokenset_new();
    ASSERT("Constructor test", z);
@@ -72,7 +72,7 @@ test_stress_1(void)
    char      **list;
    char      **lp;
 
-   _printf_test_name("test_stress_1", "tokenset_new, tokenset_add, tokenset_exists");
+   printf_test_name("test_stress_1", "tokenset_new, tokenset_add, tokenset_exists");
 
    for (iter = 0; iter < 500; iter++) {
       sprintf(version, "_%d", iter);
@@ -126,8 +126,8 @@ test_stress_2(void)
    char      **list;
    char      **lp;
 
-   _printf_test_name("test_stress_2",
-                     "tokenset_count, tokenset_get, tokenset_remove, tokenset_reset");
+   printf_test_name("test_stress_2",
+                    "tokenset_count, tokenset_get, tokenset_remove, tokenset_reset");
 
    for (iter = 0; iter < 500; iter++) {
       sprintf(x, "_%d", (int) rand() % 99);
@@ -179,7 +179,7 @@ test_stress_3(void)
    int         iter;
    char        version[10];
 
-   _printf_test_name("test_stress_3", "tokenset_get_by_id");
+   printf_test_name("test_stress_3", "tokenset_get_by_id");
 
    for (iter = 0; iter < 10; iter++) {
       sprintf(version, "_%d", iter);
@@ -205,7 +205,7 @@ test_add(void)
 {
    struct tokenset *p = tokenset_new();
 
-   _printf_test_name("test_add", "tokenset_add, tokenset_count, tokenset_exists");
+   printf_test_name("test_add", "tokenset_add, tokenset_count, tokenset_exists");
 
    tokenset_add(p, "stephan");
    tokenset_add(p, "stephan");
@@ -230,8 +230,8 @@ test_remove_1(void)
 {
    struct tokenset *p = tokenset_new();
 
-   _printf_test_name("test_remove_1",
-                     "tokenset_add, tokenset_remove, tokenset_count, tokenset_exists");
+   printf_test_name("test_remove_1",
+                    "tokenset_add, tokenset_remove, tokenset_count, tokenset_exists");
 
    tokenset_add(p, "stephan");
    tokenset_add(p, "richard");
@@ -256,7 +256,7 @@ test_remove_2(void)
 {
    struct tokenset *p = tokenset_new();
 
-   _printf_test_name("test_remove_2", "tokenset_remove, tokenset_count, tokenset_exists");
+   printf_test_name("test_remove_2", "tokenset_remove, tokenset_count, tokenset_exists");
 
    tokenset_remove(p, "reginald");
 
@@ -277,8 +277,8 @@ test_add_remove_add(void)
    struct tokenset *p = tokenset_new();
    int         id1, id2, id3, id4;
 
-   _printf_test_name("test_add_remove_add",
-                     "tokenset_add, tokenset_remove, tokenset_id, tokenset_exists");
+   printf_test_name("test_add_remove_add",
+                    "tokenset_add, tokenset_remove, tokenset_id, tokenset_exists");
 
    id1 = tokenset_add(p, "jim");
    id2 = tokenset_add(p, "james");
@@ -310,8 +310,7 @@ test_get(void)
    char      **cpp;
    char      **list1, **list2;
 
-   _printf_test_name("test_get",
-                     "tokenset_add, tokenset_get, tokenset_id, tokenset_sort");
+   printf_test_name("test_get", "tokenset_add, tokenset_get, tokenset_id, tokenset_sort");
 
    p = tokenset_new();
 
@@ -384,7 +383,7 @@ test_reset(void)
 {
    struct tokenset *z = tokenset_new();
 
-   _printf_test_name("test_reset", "tokenset_reset");
+   printf_test_name("test_reset", "tokenset_reset");
 
    tokenset_reset(z);
 
@@ -401,7 +400,7 @@ test_stub(void)
 {
    struct tokenset *z = tokenset_new();
 
-   _printf_test_name("test_stub", NULL);
+   printf_test_name("test_stub", NULL);
 
    ASSERT("Constructor test", z);
 

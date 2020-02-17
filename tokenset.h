@@ -1,13 +1,13 @@
 /**
  *  @file tokenset.h
  *  @version 1.4.0-dev0
- *  @date Tue Dec 10 12:49:29 CST 2019
- *  @copyright 2020 John A. Crow <crowja@gmail.com>
+ *  @date Sun Feb 16, 2020 07:19:21 PM CST
+ *  @copyright 2018-2020 John A. Crow <crowja@gmail.com>
  *  @license Unlicense <http://unlicense.org/>
  */
 
-#ifndef _TOKENSET_H_
-#define _TOKENSET_H_
+#ifndef TOKENSET_H
+#define TOKENSET_H
 
 /**
  *  @brief Tokenset.
@@ -18,7 +18,6 @@
  *  assigning unsigned integer identifiers to each. A tokenset
  *  can have tokens added to or removed from it.
  */
-
 struct tokenset;
 
 /**
@@ -27,7 +26,6 @@ struct tokenset;
  *  @returns On success a pointer to the new tokenset object, the
  *  NULL pointer otherwise. 
  */
-
 struct tokenset *tokenset_new(void);
 
 /**
@@ -36,7 +34,6 @@ struct tokenset *tokenset_new(void);
  *  memory.
  *  @param[in] p Pointer to a tokenset object
  */
-
 void        tokenset_free(struct tokenset **pp);
 
 /**
@@ -48,7 +45,6 @@ void        tokenset_free(struct tokenset **pp);
  *  @returns Whether added or not the unsigned integer id associated
  *  with the token is returned.
  */
-
 int         tokenset_add(struct tokenset *p, char *n);
 
 /**
@@ -57,7 +53,6 @@ int         tokenset_add(struct tokenset *p, char *n);
  *  @param p Pointer to a tokenset object
  *  @returns Returns the number of tokens in the tokenset.
  */
-
 int         tokenset_count(struct tokenset *p);
 
 /** 
@@ -67,7 +62,6 @@ int         tokenset_count(struct tokenset *p);
  *  @param n String to check.
  *  @returns Nonzero if the string exists, zero otherwise.
  */
-
 int         tokenset_exists(struct tokenset *p, char *n);
 
 /**
@@ -76,7 +70,6 @@ int         tokenset_exists(struct tokenset *p, char *n);
  *  @param p Pointer to a tokenset object.
  *  @returns NULL-terminated list of strings.
  */
-
 char      **tokenset_get(struct tokenset *p);
 
 /**
@@ -87,7 +80,6 @@ char      **tokenset_get(struct tokenset *p);
  *  @param id Identifier.
  *  @returns String associated with id.
  */
-
 const char *tokenset_get_by_id(struct tokenset *p, unsigned id);
 
 /**
@@ -97,7 +89,6 @@ const char *tokenset_get_by_id(struct tokenset *p, unsigned id);
  *  @param p Pointer to a tokenset object
  *  @param n String to remove, if found.
  */
-
 void        tokenset_remove(struct tokenset *p, char *n);
 
 /**
@@ -107,9 +98,7 @@ void        tokenset_remove(struct tokenset *p, char *n);
  *  @param n String.
  *  @returns id of the token, if found, -1 otherwise.
  */
-
 int         tokenset_id(struct tokenset *p, char *n);
-
 
 /**
  *  @brief Removes all tokens from a tokenset.
@@ -118,7 +107,6 @@ int         tokenset_id(struct tokenset *p, char *n);
  *  @param p Pointer to a tokenset object
  *  @returns TODO
  */
-
 void        tokenset_reset(struct tokenset *p);
 
 /**
@@ -128,16 +116,13 @@ void        tokenset_reset(struct tokenset *p);
  *  ordered. Does not change the token-id pairing.
  *  @param p Pointer to a tokenset object
  */
-
 void        tokenset_sort(struct tokenset *p);
-
 
 /**
  *  @brief Return the version of this package
  *  @details TODO
  *  @returns TODO
  */
-
 const char *tokenset_version(void);
 
 #endif
